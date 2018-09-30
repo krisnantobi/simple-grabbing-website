@@ -1,4 +1,7 @@
 <?php
+/**
+ * author : krisnantobiyuh@gmail.com
+ */
 include("simple_html_dom.php");
 include("lib/Hashtags.php");
 
