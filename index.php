@@ -1,44 +1,25 @@
 <?php
-$data['title']= "";
-$data['image']= "";
-$data['desc']= "";
-$data['price']= "";
-$style_output = "";
-$error = "";
 
-include("simple_html_dom.php");
+include("lib/Engine.php");
+
 if (isset($_POST['send']) && !empty($_POST['url'])) {
-	$loader = "Please wait";
-	$url = $_POST['url'];
-	//curl init
-	$curl = curl_init();
-	curl_setopt($curl, CURLOPT_HEADER, 0);
-	curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-	curl_setopt($curl, CURLOPT_URL, $url);
-	$html = curl_exec($curl);
-	$dom = new simple_html_dom(null, true, true, DEFAULT_TARGET_CHARSET, true, DEFAULT_BR_TEXT, DEFAULT_SPAN_TEXT);
-	$html = $dom->load($html, true, true);
-	$html = file_get_html($url, false, null, 0);
-	// store data
-	$data['image'] = $html->find('div[class="image-wrapper"] img', 0)->attr['src'];
-		foreach ($html->find('div[data-qa-id="qa_product_info"]') as $html) :
-			$data['title'] = $html->find('span', 0)->plaintext;
-			$data['price'] = $html->find('span', 1)->plaintext;
-			$data['desc'] = str_replace('<span>Ukuran berdasarkan standar Salestock</span>', '', $html->find('.markdown', 0)->innertext);
-		endforeach;
-
-	//check data
-	if (!isset($data) || empty($data['title']) || empty($data['price']) || empty($data['desc']) || empty($data['image'])) {
-		$error = "Error request product. Try again";
-	}
-
-	$style_output = "margin-top:100px";
+	$hastags = (new Hastags())->get($_POST);
+	$data    = (new Engine())->init($_POST);
 }
+
+$img   = (isset($data['image'])) ? $data['image'] : "" ;
+$title = (isset($data['title'])) ? $data['title'] : "";
+$price = (isset($data['price'])) ? $data['price'] : "";
+$desc  = (isset($data['desc'])) ? $data['desc'] : "";
+$hast  = (isset($data['hastags'])) ? $data['hastags'] : "";
+$error = (empty($data) || empty($title) || empty($price) || empty($desc) || empty($hast)) ? "If you don't see anything. please enter your URL and try again" : "";
+$style_output = (isset($data['image'])) ? "margin-top:100px" : "" ;
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Contact V1</title>
+	<title>Salto</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
@@ -73,7 +54,13 @@ if (isset($_POST['send']) && !empty($_POST['url'])) {
 				</span>
 
 				<div class="wrap-input1 validate-input" data-validate = "Name is required">
-					<input class="input1" type="text" name="url" placeholder="Name">
+					<input class="input1" type="text" name="url" placeholder="enter Salto URL">
+					<span class="shadow-input1"></span><hr>
+				</div>
+				<div class="wrap-input1 validate-input" data-validate = "Name is required">
+					<span style="color:#9fa6a8">Include Hastags</span><br>
+					<input class="check1" type="checkbox" name="check1" placeholder="Name">Celana
+					<input class="check2" type="checkbox" name="check2" placeholder="Name">Dress
 					<span class="shadow-input1"></span>
 				</div>
 				<div class="container-contact1-form-btn">
@@ -91,16 +78,20 @@ if (isset($_POST['send']) && !empty($_POST['url'])) {
 			<div class="container" data-validate = "Message is required" style=<?=$style_output?>>
 				<div class="row">
 					<div class="col-sm-6">
-						<img src="<?= $data['image'] ?>" style="width:80%">
+						<img src="<?=$img?>" style="width:80%">
 					</div>
 					<div class="col-sm-6">
-						<strong><?=$data['title']?></strong><br>
-						<strong><b><?= $data['price'] ?></b></strong><br><br>
-						<?=$data['desc']?>
+						<strong><?=$title?></strong><br>
+						<strong><b><?=$price?></b></strong><br><br>
+						<?=$desc?><br><br>
+						<?=$hast?>
 					</div>
 				</div>
 			</div>
 
+		</div>
+		<div>
+			<span style="color : #bdf3ff">&copy copyright 2018 wixout : salto</span>
 		</div>
 	</div>
 
@@ -137,4 +128,3 @@ if (isset($_POST['send']) && !empty($_POST['url'])) {
 
 </body>
 </html>
-
