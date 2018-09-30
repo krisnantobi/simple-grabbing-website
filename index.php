@@ -48,7 +48,7 @@ $style_output = (isset($data['image'])) ? "margin-top:100px" : "" ;
 
 			<form class="contact1-form validate-form" action="" method="post">
 				<span class="contact1-form-title">
-					<a style="color:red"><?= $error?></a> <br><br>
+					<a style="color:#f89b86"><?= $error?></a> <br><br>
 					Get in touch
 				</span>
 
@@ -75,6 +75,7 @@ $style_output = (isset($data['image'])) ? "margin-top:100px" : "" ;
 			</form>
 
 			<div class="container" data-validate = "Message is required" style=<?=$style_output?>>
+			<?=empty($error)? '<hr>' : '<hr><span style="color:#f89b86">Result not completed. Please enter your URL and try again</span>'?>
 				<div class="row">
 					<div class="col-sm-6">
 						<img src="<?=$img?>" style="width:80%">
