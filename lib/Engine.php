@@ -1,6 +1,6 @@
 <?php
 include("simple_html_dom.php");
-include("lib/Hastags.php");
+include("lib/Hashtags.php");
 
 class Engine
 {
@@ -26,7 +26,7 @@ class Engine
             $data['title']   = $html->find('span', 0)->plaintext;
             $data['price']   = $html->find('span', 1)->plaintext;
             $data['desc']    = str_replace('<span>Ukuran berdasarkan standar Salestock</span>', '', $html->find('.markdown', 0)->innertext);
-            $data['hastags'] = (new Hastags())->get($_POST);
+            $data['hashtags'] = (new Hashtags())->get($_POST);
         endforeach;
 
         return $data;

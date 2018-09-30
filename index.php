@@ -3,7 +3,6 @@
 include("lib/Engine.php");
 
 if (isset($_POST['send']) && !empty($_POST['url'])) {
-	$hastags = (new Hastags())->get($_POST);
 	$data    = (new Engine())->init($_POST);
 }
 
@@ -11,8 +10,8 @@ $img   = (isset($data['image'])) ? $data['image'] : "" ;
 $title = (isset($data['title'])) ? $data['title'] : "";
 $price = (isset($data['price'])) ? $data['price'] : "";
 $desc  = (isset($data['desc'])) ? $data['desc'] : "";
-$hast  = (isset($data['hastags'])) ? $data['hastags'] : "";
-$error = (empty($data) || empty($title) || empty($price) || empty($desc) || empty($hast)) ? "If you don't see anything. please enter your URL and try again" : "";
+$hash  = (isset($data['hashtags'])) ? $data['hashtags'] : "";
+$error = (empty($data) || empty($title) || empty($price) || empty($desc)) ? "If you don't see anything. please enter your URL and try again" : "";
 $style_output = (isset($data['image'])) ? "margin-top:100px" : "" ;
 
 ?>
@@ -58,8 +57,8 @@ $style_output = (isset($data['image'])) ? "margin-top:100px" : "" ;
 					<span class="shadow-input1"></span><hr>
 				</div>
 				<div class="wrap-input1 validate-input" data-validate = "Name is required">
-					<span style="color:#9fa6a8">Include Hastags</span><br>
-					<input class="check1" type="checkbox" name="check1" placeholder="Name">Celana
+					<span style="color:#9fa6a8">Include Hashtags</span><br>
+					<input class="check1" type="checkbox" name="check1" placeholder="Name">Pants
 					<input class="check2" type="checkbox" name="check2" placeholder="Name">Dress
 					<span class="shadow-input1"></span>
 				</div>
@@ -84,7 +83,7 @@ $style_output = (isset($data['image'])) ? "margin-top:100px" : "" ;
 						<strong><?=$title?></strong><br>
 						<strong><b><?=$price?></b></strong><br><br>
 						<?=$desc?><br><br>
-						<?=$hast?>
+						<?=$hash?>
 					</div>
 				</div>
 			</div>

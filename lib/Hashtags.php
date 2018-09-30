@@ -1,18 +1,18 @@
 <?php
 
 
-class Hastags
+class Hashtags
 {
     public function get($POST): string
     {
-        $hastags = "";
-        if (!empty($_POST['check1'])) $hastags = $hastags . $this->pants();
-        if (!empty($_POST['check2'])) $hastags = $hastags . $this->dress();
-        return $hastags;
+        $hashtags = "";
+        if (!empty($_POST['check1'])) $hashtags = $hashtags . $this->pants();
+        if (!empty($_POST['check2'])) $hashtags = $hashtags . $this->dress();
+        return $hashtags;
     }
     public function pants(): string
     {
-        $hastags =
+        $hashtags =
             "#celanajeansbigsize,
             #celanabigsizemurah,
             #celanaoversizemurah,
@@ -41,12 +41,12 @@ class Hastags
             #celanakerjamurah"
         ;
 
-        return $hastags;
+        return $hashtags;
     }
 
     public function dress(): string
     {
-        $hastags =
+        $hashtags =
             "#dressjumbo,
             #jualdressjumbo,
             #dressoversize,
@@ -76,6 +76,6 @@ class Hastags
             #ootdoversize"
         ;
 
-        return $hastags;
+        return $hashtags;
     }
 }
