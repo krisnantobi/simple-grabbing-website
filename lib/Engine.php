@@ -27,7 +27,9 @@ class Engine
         }
         foreach ($html->find('div[data-qa-id="qa_product_info"]') as $html) :
             $desc = str_replace('<span>Ukuran berdasarkan standar Salestock</span>', '', $html->find('.markdown', 0)->innertext);
-            $data['title']   = $html->find('span', 0)->plaintext;
+            $desc = str_replace('<span>Ukuran berdasarkan standar Sale Stock</span>', '', $desc);
+
+	    $data['title']   = $html->find('span', 0)->plaintext;
             $data['price']   = $html->find('span', 1)->plaintext;
             $data['desc']    = str_replace('<span>Ukuran Berdasarkan Standar Sale Stock</span>', '', $desc);
             $data['hashtags'] = (new Hashtags())->get($_POST);
