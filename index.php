@@ -3,11 +3,14 @@
 include("lib/Engine.php");
 $error = "";
 if (isset($_POST['send']) && !empty($_POST['url'])) {
-	echo getenv("username");
+	// echo getenv("username");
 	$data    = (new Engine())->init($_POST);
+	// echo json_encode($data['desc']);exit();
+	// echo json_encode($data['title']);exit();;
 	$error = (empty($data['image']) ||
 			  empty($data['title']) ||
 			  empty($data['price']) ||
+			  empty($data['guide_size']) ||
 			  empty($data['desc'])) ?
 		      '<hr><span style=" color :#f89b86">Result not completed. Please enter your URL and try again</span>' :
 			  "<hr>";
@@ -17,6 +20,7 @@ $img   = (isset($data['image'])) ? $data['image'] : "" ;
 $title = (isset($data['title'])) ? $data['title'] : "";
 $price = (isset($data['price'])) ? $data['price'] : "";
 $desc  = (isset($data['desc'])) ? $data['desc'] : "";
+$guide_size  = (isset($data['guide_size'])) ? $data['guide_size'] : "";
 $hash  = (isset($data['hashtags'])) ? $data['hashtags'] : "";
 $style_output = (isset($data['image'])) ? "margin-top:100px" : "" ;
 ?>
@@ -89,6 +93,7 @@ $style_output = (isset($data['image'])) ? "margin-top:100px" : "" ;
 						<strong><?=$title?></strong><br>
 						<strong><b><?=$price?></b></strong><br><br>
 						<?=$desc?><br><br>
+						<?=$guide_size?><br><br>
 						<?=$hash?>
 					</div>
 				</div>

@@ -25,15 +25,23 @@ class Engine
         if (isset($data['image'])) {
             $data['image'] = $html->find('div[class="image-wrapper"] img', 0)->attr['src'];
         }
-        foreach ($html->find('div[data-qa-id="qa_product_info"]') as $html) :
+
+        // foreach ($html->find('div[data-qa-id="qa_product_title"]') as $html) :
             $desc = str_replace('<span>Ukuran berdasarkan standar Salestock</span>', '', $html->find('.markdown', 0)->innertext);
             $desc = str_replace('<span>Ukuran berdasarkan standar Sale Stock</span>', '', $desc);
+            $desc = str_replace('<span>Ukuran Berdasarkan Standar Sale Stock</span>', '', $desc);
 
-	    $data['title']   = $html->find('span', 0)->plaintext;
-            $data['price']   = $html->find('span', 1)->plaintext;
-            $data['desc']    = str_replace('<span>Ukuran Berdasarkan Standar Sale Stock</span>', '', $desc);
-            $data['hashtags'] = (new Hashtags())->get($_POST);
-        endforeach;
+        $guide_size = str_replace('<span>Ukuran berdasarkan standar Salestock</span>', '', $html->find('.markdown', 1)->innertext);
+        $guide_size = str_replace('<span>Ukuran berdasarkan standar Sale Stock</span>', '', $guide_size);
+        $guide_size = str_replace('<span>Ukuran Berdasarkan Standar Sale Stock</span>', '', $guide_size);
+
+                $data['title']   = $html->find('h3[data-qa-id="qa_product_title"]', 0)->innertext;
+                $data['price']   = $html->find('h2[data-qa-id="qa_price"]', 0)->innertext;
+                $data['desc']    = $desc;
+                $data['guide_size'] = $guide_size;
+
+                $data['hashtags'] = (new Hashtags())->get($_POST);
+        // endforeach;
 
         return $data;
     }
