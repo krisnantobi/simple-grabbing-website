@@ -1,9 +1,16 @@
 <?php
 
 include("lib/Engine.php");
-
+$error = "";
 if (isset($_POST['send']) && !empty($_POST['url'])) {
+	echo getenv("username");
 	$data    = (new Engine())->init($_POST);
+	$error = (empty($data['image']) ||
+			  empty($data['title']) ||
+			  empty($data['price']) ||
+			  empty($data['desc'])) ?
+		      '<hr><span style=" color :#f89b86">Result not completed. Please enter your URL and try again</span>' :
+			  "<hr>";
 }
 
 $img   = (isset($data['image'])) ? $data['image'] : "" ;
@@ -11,9 +18,7 @@ $title = (isset($data['title'])) ? $data['title'] : "";
 $price = (isset($data['price'])) ? $data['price'] : "";
 $desc  = (isset($data['desc'])) ? $data['desc'] : "";
 $hash  = (isset($data['hashtags'])) ? $data['hashtags'] : "";
-$error = (empty($data) || empty($title) || empty($price) || empty($desc)) ? "If you don't see anything. please enter your URL and try again" : "";
 $style_output = (isset($data['image'])) ? "margin-top:100px" : "" ;
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,7 +53,7 @@ $style_output = (isset($data['image'])) ? "margin-top:100px" : "" ;
 
 			<form class="contact1-form validate-form" action="" method="post">
 				<span class="contact1-form-title">
-					<a style="color:#f89b86"><?= $error?></a> <br><br>
+					<a style="color:#f89b86"></a>
 					Get in touch
 				</span>
 
@@ -75,7 +80,7 @@ $style_output = (isset($data['image'])) ? "margin-top:100px" : "" ;
 			</form>
 
 			<div class="container" data-validate = "Message is required" style=<?=$style_output?>>
-			<?=empty($error)? '<hr>' : '<hr><span style="color:#f89b86">Result not completed. Please enter your URL and try again</span>'?>
+			<?=$error?>
 				<div class="row">
 					<div class="col-sm-6">
 						<img src="<?=$img?>" style="width:80%">
@@ -126,9 +131,9 @@ $style_output = (isset($data['image'])) ? "margin-top:100px" : "" ;
 <!--===============================================================================================-->
 <script src="js/main.js"></script>
 <script>
-    $(document).ready(function(){ 
+    $(document).ready(function(){
         $('body').find('img[src$="https://cdn.rawgit.com/000webhost/logo/e9bd13f7/footer-powered-by-000webhost-white2.png"]').remove();
-});
+	});
 </script>
 
 </body>
