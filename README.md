@@ -1,7 +1,7 @@
 # simple-grabbing-website
 PHP simple grabbing website no framework. with html DOM.
 
-Click for demo <a href="https://saltourl.000webhostapp.com/" target="_blank">salto</a>
+Click for demo <a href="https://saltourl.000webhostapp.com/" target="_blank">saltourl</a>
 
 <img src="images/sc2.JPG" style="width: 500px; max-width: 100%; height: auto" title="Click for the larger version." />
 <img src="images/sc3.JPG" style="width: 500px; max-width: 100%; height: auto" title="Click for the larger version." />
