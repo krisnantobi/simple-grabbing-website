@@ -1,6 +1,10 @@
 # simple-grabbing-website
 PHP simple grabbing website no framework. with html DOM.
 
+<img src="images/sc2.JPG" style="width: 500px; max-width: 100%; height: auto" title="Click for the larger version." />
+<img src="images/sc3.JPG" style="width: 500px; max-width: 100%; height: auto" title="Click for the larger version." />
+
+
 ### clone project
 
 `git clone https://github.com/krisnantobiyuh/simple-grabbing-website.git`
