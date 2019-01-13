@@ -3,14 +3,14 @@
 
 class Hashtags
 {
-    public function get($POST): string
+    public function get($POST)
     {
         $hashtags = "";
         if (!empty($_POST['check1'])) $hashtags = $hashtags . $this->pants();
         if (!empty($_POST['check2'])) $hashtags = $hashtags . $this->dress();
         return $hashtags;
     }
-    public function pants(): string
+    public function pants()
     {
         $hashtags =
             "#celanajeansbigsize,
@@ -44,7 +44,7 @@ class Hashtags
         return $hashtags;
     }
 
-    public function dress(): string
+    public function dress()
     {
         $hashtags =
             "#dressjumbo,
